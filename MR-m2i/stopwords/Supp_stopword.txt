@@ -1,0 +1,28 @@
+public static String supprimmeMotVide(String lang,String chaine) {
+		String[] mot=chaine.split(" ");
+		ArrayList<String> mots=new ArrayList<String>();
+		String chaineN="";
+		try {
+			for(int i=0;i<mot.length;i++) {
+				mots.add(mot[i]);
+			}
+			for(int i=0;i<mot.length;i++) {
+				BufferedReader br =new BufferedReader(new FileReader("stopwords\\stopwords_"+lang+".txt"));
+				String line;
+				while((line=br.readLine())!=null) {
+					if(mot[i].equals(line)) {
+						mots.remove(mot[i]);
+					}
+				}
+				br.close();
+			}
+			
+			for(int i=0;i<mots.size();i++) {
+				chaineN+=mots.get(i)+" ";
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return chaineN;
+	}
